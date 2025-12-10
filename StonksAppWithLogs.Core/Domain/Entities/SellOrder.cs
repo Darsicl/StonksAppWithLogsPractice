@@ -4,6 +4,7 @@ namespace StonksAppWithLogs.Core.Domain.Entities
 {
     public class SellOrder()
     {
+        [Key]
         public Guid SellOrderId { get; set; }
 
         [Required]

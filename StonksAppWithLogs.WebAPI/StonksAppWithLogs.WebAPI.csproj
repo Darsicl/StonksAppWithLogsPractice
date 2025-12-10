@@ -14,4 +14,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="10.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\StonksAppWithLogs.Infrastructure\StonksAppWithLogs.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

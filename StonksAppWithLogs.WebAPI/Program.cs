@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using StonksAppWithLogs.Infrastructure.DbContexts;
 
 var builder = WebApplication.CreateBuilder(args);

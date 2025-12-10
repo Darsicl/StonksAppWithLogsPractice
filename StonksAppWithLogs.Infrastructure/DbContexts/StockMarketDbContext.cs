@@ -18,7 +18,8 @@ namespace StonksAppWithLogs.Infrastructure.DbContexts
         {
             base.OnModelCreating(modelBuilder);
 
-
+            modelBuilder.Entity<BuyOrder>().ToTable("BuyOrders");
+            modelBuilder.Entity<SellOrder>().ToTable("SellOrders");
         }
     }
 }

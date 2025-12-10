@@ -1,3 +1,5 @@
 <Solution>
-  <Project Path="StonksAppWithLogs.WebAPI/StonksAppWithLogs.WebAPI.csproj" />
+  <Project Path="../../../../../../../../Projects/StonksAppWithLogs/StonksAppWithLogs.Core/StonksAppWithLogs.Core.csproj" />
+  <Project Path="../../../../../../../../Projects/StonksAppWithLogs/StonksAppWithLogs.Infrastructure/StonksAppWithLogs.Infrastructure.csproj" />
+  <Project Path="../../../../../../../../Projects/StonksAppWithLogs/StonksAppWithLogs.WebAPI/StonksAppWithLogs.WebAPI.csproj" />
 </Solution>

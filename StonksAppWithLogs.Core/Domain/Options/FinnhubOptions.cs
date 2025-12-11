@@ -4,7 +4,7 @@ using System.Text;
 
 namespace StonksAppWithLogs.Core.Domain.Options
 {
-    public class TradingOptions
+    public class FinnhubOptions
     {
         public string FinnhubToken { get; set; } = string.Empty;
     }

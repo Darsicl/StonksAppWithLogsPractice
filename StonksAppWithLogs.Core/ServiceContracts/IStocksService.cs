@@ -1,16 +1,17 @@
 ﻿using StonksAppWithLogs.Core.Domain.Entities;
+using StonksAppWithLogs.Core.DTO;
 
 namespace StonksAppWithLogs.Core.ServiceContracts
 {
     public interface IStocksService
     {
-        Task<BuyOrder> CreateBuyOrder(BuyOrder buyOrder);
+        Task<BuyOrderResponse> CreateBuyOrder(BuyOrderRequest? buyOrderRequest);
 
-        Task<SellOrder> CreateSellOrder(SellOrder sellOrder);
+        Task<SellOrderResponse> CreateSellOrder(SellOrderRequest? sellOrderRequest);
 
-        Task<List<BuyOrder>> GetBuyOrders();
+        Task<List<BuyOrderResponse>> GetBuyOrders();
 
-        Task<List<SellOrder>> GetSellOrders();
+        Task<List<SellOrderResponse>> GetSellOrders();
     }
 
 }

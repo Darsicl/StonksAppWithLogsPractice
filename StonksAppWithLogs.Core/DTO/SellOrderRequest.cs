@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using StonksAppWithLogs.Core.Domain.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace StonksAppWithLogs.Core.DTO
 {
@@ -29,6 +30,18 @@ namespace StonksAppWithLogs.Core.DTO
             }
 
             return results;
+        }
+
+        public SellOrder ToSellOrder()
+        {
+            return new SellOrder()
+            {
+                StockSymbol = StockSymbol,
+                StockName = StockName,
+                DateAndTimeOfOrder = DateAndTimeOfOrder,
+                Quantity = Quantity,
+                Price = Price
+            };
         }
     }
 

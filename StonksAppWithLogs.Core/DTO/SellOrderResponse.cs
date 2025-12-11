@@ -1,4 +1,6 @@
-﻿namespace StonksAppWithLogs.Core.DTO
+﻿using StonksAppWithLogs.Core.Domain.Entities;
+
+namespace StonksAppWithLogs.Core.DTO
 {
     public class SellOrderResponse
     {
@@ -17,6 +19,22 @@
         public double TradeAmount
         {
             get { return Quantity * Price; }
+        }
+    }
+
+    public static class SellOrderResponseExtensions
+    {
+        public static SellOrderResponse ToSellOrderResponse(this SellOrder sellOrder)
+        {
+            return new SellOrderResponse()
+            {
+                SellOrderID = sellOrder.SellOrderId,
+                StockSymbol = sellOrder.StockSymbol,
+                StockName = sellOrder.StockName,
+                DateAndTimeOfOrder = sellOrder.DateAndTimeOfOrder,
+                Quantity = sellOrder.Quantity,
+                Price = sellOrder.Price
+            };
         }
     }
 

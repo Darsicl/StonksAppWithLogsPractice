@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using StonksAppWithLogs.Core.Domain.Options;
 using StonksAppWithLogs.Core.Domain.RepositoryContracts;
 using StonksAppWithLogs.Core.ServiceContracts;
 using StonksAppWithLogs.Core.Services;
@@ -21,6 +22,8 @@ builder.Services.AddHttpClient();
 
 builder.Services.AddSwaggerGen();
 
+builder.Services.Configure<FinnhubOptions>(
+    builder.Configuration.GetSection("Finnhub"));
 
 builder.Services.AddDbContext<StockMarketDbContext>(options =>
 {

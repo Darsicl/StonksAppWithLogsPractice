@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
+using StonksAppWithLogs.Core.Domain.Options;
 using StonksAppWithLogs.Core.Domain.RepositoryContracts;
 using System;
 using System.Collections.Generic;
@@ -11,12 +12,12 @@ namespace StonksAppWithLogs.Infrastructure.Repositories
 {
     public class FinnhubRepository : IFinnhubRepository
     {
-        private readonly IConfiguration _configuration;
+        private readonly IOptions<FinnhubOptions> _finnhubOptions;
         private readonly IHttpClientFactory _factory;
 
-        public FinnhubRepository(IConfiguration configuration, IHttpClientFactory factory)
+        public FinnhubRepository(IOptions<FinnhubOptions> finnhubOptions, IHttpClientFactory factory)
         {
-            _configuration = configuration;
+            _finnhubOptions = finnhubOptions;
             _factory = factory;
         }
         public async Task<Dictionary<string, object>?> GetCompanyProfile(string stockSymbol)
@@ -24,7 +25,7 @@ namespace StonksAppWithLogs.Infrastructure.Repositories
            using var client = _factory.CreateClient();
 
             Dictionary<string, object>? companyProfile = await client
-                .GetFromJsonAsync<Dictionary<string, object>?>($"https://finnhub.io/api/v1/stock/profile2?symbol={stockSymbol}&token={_configuration["Finnhub:Tokken"]}");
+                .GetFromJsonAsync<Dictionary<string, object>?>($"https://finnhub.io/api/v1/stock/profile2?symbol={stockSymbol}&token={_finnhubOptions.Value.Token}");
 
 
             if (companyProfile == null)
@@ -41,7 +42,7 @@ namespace StonksAppWithLogs.Infrastructure.Repositories
             using var client = _factory.CreateClient();
 
             Dictionary<string, object>? stockPriceQuote = await client
-                .GetFromJsonAsync<Dictionary<string, object>?>($"https://finnhub.io/api/v1/quote?symbol={stockSymbol}&token={_configuration["Finnhub:Tokken"]}");
+                .GetFromJsonAsync<Dictionary<string, object>?>($"https://finnhub.io/api/v1/quote?symbol={stockSymbol}&token={_finnhubOptions.Value.Token}");
 
 
             if (stockPriceQuote == null)
@@ -58,7 +59,7 @@ namespace StonksAppWithLogs.Infrastructure.Repositories
             using var client = _factory.CreateClient();
 
             List<Dictionary<string, string>>? stocks = await client
-                .GetFromJsonAsync<List<Dictionary<string, string>>?>($"https://finnhub.io/api/v1/stock/symbol?exchange=US&token={_configuration["Finnhub:Tokken"]}");
+                .GetFromJsonAsync<List<Dictionary<string, string>>?>($"https://finnhub.io/api/v1/stock/symbol?exchange=US&token={_finnhubOptions.Value.Token}");
 
 
             if (stocks == null)
@@ -72,7 +73,7 @@ namespace StonksAppWithLogs.Infrastructure.Repositories
             using var client = _factory.CreateClient();
 
             Dictionary<string, object>? stocks = await client
-                .GetFromJsonAsync<Dictionary<string, object>?>($"https://finnhub.io/api/v1/search?q={stockSymbolToSearch}&token={_configuration["Finnhub:Tokken"]}");
+                .GetFromJsonAsync<Dictionary<string, object>?>($"https://finnhub.io/api/v1/search?q={stockSymbolToSearch}&token={_finnhubOptions.Value.Token}");
 
 
             if (stocks == null)

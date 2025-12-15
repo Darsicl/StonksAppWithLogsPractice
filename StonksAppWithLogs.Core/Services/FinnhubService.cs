@@ -1,4 +1,5 @@
-﻿using StonksAppWithLogs.Core.Domain.RepositoryContracts;
+﻿
+using StonksAppWithLogs.Core.Domain.RepositoryContracts;
 using StonksAppWithLogs.Core.ServiceContracts;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace StonksAppWithLogs.Core.Services
                 throw new ArgumentException("Stock symbol cannot be null or empty.", nameof(stockSymbol));
 
             Dictionary<string, object>? companyProfile = await _finnhubRepository.GetCompanyProfile(stockSymbol);
-            
+
             return companyProfile;
         }
 
@@ -37,7 +38,7 @@ namespace StonksAppWithLogs.Core.Services
 
         public async Task<List<Dictionary<string, string>>?> GetStocks()
         {
-           
+
             List<Dictionary<string, string>>? stock = await _finnhubRepository.GetStocks();
 
             return stock;

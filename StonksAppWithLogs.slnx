@@ -1,5 +1,6 @@
 <Solution>
-  <Project Path="../../../../../../../../Projects/StonksAppWithLogs/StonksAppWithLogs.Core/StonksAppWithLogs.Core.csproj" />
-  <Project Path="../../../../../../../../Projects/StonksAppWithLogs/StonksAppWithLogs.Infrastructure/StonksAppWithLogs.Infrastructure.csproj" />
-  <Project Path="../../../../../../../../Projects/StonksAppWithLogs/StonksAppWithLogs.WebAPI/StonksAppWithLogs.WebAPI.csproj" />
+  <Project Path="StonksAppWithLogs.Core/StonksAppWithLogs.Core.csproj" />
+  <Project Path="StonksAppWithLogs.Infrastructure/StonksAppWithLogs.Infrastructure.csproj" />
+  <Project Path="StonksAppWithLogs.WebAPI/StonksAppWithLogs.WebAPI.csproj" />
+  <Project Path="Tests/Tests.csproj" Id="893e1a50-6c90-4f2e-a06b-a59ddaeff717" />
 </Solution>

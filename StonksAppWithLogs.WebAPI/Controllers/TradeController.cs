@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using StonksAppWithLogs.Core.Domain.Entities;
+﻿using Microsoft.AspNetCore.Mvc;
 using StonksAppWithLogs.Core.DTO;
 using StonksAppWithLogs.Core.ServiceContracts;
 
@@ -29,7 +27,7 @@ namespace StonksAppWithLogs.WebAPI.Controllers
 
             if (string.IsNullOrWhiteSpace(stockSymbol))
             {
-                _logger.LogWarning("Client send empty symbol {Symbol}");
+                _logger.LogWarning("Client send empty symbol {Symbol}", stockSymbol);
 
                 ModelState.AddModelError("stockSymbol", "Stock symbol cannot be empty.");
 
@@ -51,7 +49,7 @@ namespace StonksAppWithLogs.WebAPI.Controllers
         }
 
         //GET    /api/trade/orderspdf → генерирует и отдаёт PDF-файл со всеми ордерами(любой PDF-генератор, например QuestPDF или DinkToPdf)
-        
+
         [HttpPost("buyorder")]
         public async Task<IActionResult> CreateBuyOrder([FromBody] BuyOrderRequest buyOrderRequest)
         {
@@ -67,7 +65,9 @@ namespace StonksAppWithLogs.WebAPI.Controllers
 
             _logger.LogInformation("Successfully created buy order {@BuyOrderRequest}", buyOrderRequest);
 
-            return Created();
+            return CreatedAtAction(nameof(GetBuyOrders),
+            new { id = createdBuyOrder.BuyOrderID },
+            createdBuyOrder);
         }
 
         [HttpPost("sellorder")]
@@ -84,9 +84,11 @@ namespace StonksAppWithLogs.WebAPI.Controllers
 
             var createdSellOrder = await _stocksService.CreateSellOrder(sellOrderRequest);
 
-            _logger.LogInformation("Successfully created buy order {@SellOrderRequest}", sellOrderRequest);
+            _logger.LogInformation("Successfully created sell order {@SellOrderRequest}", sellOrderRequest);
 
-            return Created();
+            return CreatedAtAction(nameof(GetSellOrders),
+            new { id = createdSellOrder.SellOrderID },
+            createdSellOrder);
         }
 
         [HttpGet("buyorderslist")]
@@ -113,5 +115,15 @@ namespace StonksAppWithLogs.WebAPI.Controllers
             return Ok(sellOrders);
         }
 
+        [HttpGet("allorders")]
+        public async Task<IActionResult> GetAllOrders()
+        {
+            List<BuyOrderResponse> buyOrders = await _stocksService.GetBuyOrders();
+            List<SellOrderResponse> sellOrders = await _stocksService.GetSellOrders();
+
+            Orders orders = new Orders() { BuyOrders = buyOrders, SellOrders = sellOrders };
+
+            return Ok(orders);
+        }
     }
 }
